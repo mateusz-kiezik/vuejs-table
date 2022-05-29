@@ -13,8 +13,12 @@ import { BootstrapVue } from 'bootstrap-vue'
 import App from './views/App'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap-vue/dist/bootstrap-vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(BootstrapVue)
+Vue.use(VueAxios, axios)
 
 /**
  * The following block of code may be used to automatically register your
