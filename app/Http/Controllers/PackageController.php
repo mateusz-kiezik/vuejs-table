@@ -2,48 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PackageResource;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-
 
 class PackageController extends Controller
 {
-    public function search(Request $request)
+    public function search(Request $request): JsonResponse
     {
-        try {
-            $response = Http::get('https://api.npms.io/v2/search?size=250&q=' . $request['q']);
+        $response = Http::get('https://api.npms.io/v2/search', [
+            'size' => $request['size'],
+            'q' => $request['q'],
+            'from' => ($request['page'] * $request['size']) - $request['size']
+        ]);
 
-            $collection = collect($response['results']);
-
-            $repositiries = [];
-
-            foreach ($collection as $item) {
-                if (array_key_exists('repository', $item['package']['links'])) {
-                    $data = [
-                        'name' => $item['package']['name'],
-                        'repository' => $item['package']['links']['repository']
-                    ];
-                    array_push($repositiries, $data);
-                }
-            }
-
+        if ($response->ok()) {
             return response()->json([
                 'success' => true,
-                'data' => $repositiries,
+                'data' => $response->json()
             ]);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-
+        } else {
             return response()->json([
-                'success' => false
+                'success' => false,
+                'error' => $response->json()
             ]);
         }
     }
-
-
 }

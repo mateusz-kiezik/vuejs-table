@@ -4,21 +4,30 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-// require('./bootstrap');
-//
-// window.Vue = require('vue').default;
-import "./bootstrap"
+import './bootstrap';
 import Vue from 'vue'
-import { BootstrapVue } from 'bootstrap-vue'
-import App from './views/App'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'bootstrap-vue/dist/bootstrap-vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import { TablePlugin } from 'bootstrap-vue';
+import { PaginationPlugin } from 'bootstrap-vue';
+import { FormInputPlugin } from 'bootstrap-vue';
+import { FormPlugin } from 'bootstrap-vue';
+import { OverlayPlugin } from 'bootstrap-vue';
+import { ButtonPlugin } from 'bootstrap-vue';
+import { ModalPlugin } from 'bootstrap-vue';
+import App from './views/App';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+import 'bootstrap-vue/dist/bootstrap-vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
-Vue.use(BootstrapVue)
-Vue.use(VueAxios, axios)
+Vue.use(TablePlugin);
+Vue.use(PaginationPlugin);
+Vue.use(FormInputPlugin);
+Vue.use(FormPlugin);
+Vue.use(OverlayPlugin);
+Vue.use(ButtonPlugin);
+Vue.use(ModalPlugin);
+Vue.use(VueAxios, axios);
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,20 +37,13 @@ Vue.use(VueAxios, axios)
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-// const app = new Vue({
-//     el: '#app',
-// });
 
 window.onload = function() {
     const app = new Vue({
